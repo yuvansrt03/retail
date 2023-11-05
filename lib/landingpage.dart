@@ -79,11 +79,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return homescreen();
       case 1:
-        return QRScreen();
+        return qrscanner();
       case 2:
-        return FavScreen();
+        return NotificationsScreen();
       default:
-        return QRScreen();
+        return qrscanner();
     }
   }
 }

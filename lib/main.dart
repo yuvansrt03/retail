@@ -2,11 +2,12 @@ import 'package:diamond_bottom_bar/diamond_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:retail/home_screen.dart';
 import 'clicktoadd_screen.dart';
-import 'constansts.dart';
+
 import 'fav_screen.dart';
+import 'login_screen.dart';
 
 void main(List<String> args) {
-  runApp(RetailApp());
+  runApp(MyApp());
 }
 
 class RetailApp extends StatelessWidget {
@@ -57,11 +58,33 @@ class _HomeScreenState extends State<HomeScreen> {
       case 0:
         return homescreen();
       case 1:
-        return QRScreen();
+        return qrscanner();
       case 2:
-        return FavScreen();
+        return NotificationsScreen();
       default:
-        return QRScreen();
+        return qrscanner();
     }
+  }
+}
+
+class NotificationsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Notifications'),
+      ),
+      body: ListView.builder(
+        itemCount: 20, // Generate 20 notifications
+        itemBuilder: (context, index) {
+          final productName = 'Product ${index + 1}';
+          final description = 'Description for $productName';
+          return ListTile(
+            title: Text(productName),
+            subtitle: Text(description),
+          );
+        },
+      ),
+    );
   }
 }

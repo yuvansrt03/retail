@@ -1,6 +1,8 @@
 import 'package:draggable_home/draggable_home.dart';
 import 'package:flutter/material.dart';
+import 'package:retail/clicktoadd_screen.dart';
 import 'package:retail/constansts.dart';
+import 'package:retail/notifications.dart';
 import 'package:retail/shop_screen.dart';
 
 class homescreen extends StatefulWidget {
@@ -14,10 +16,10 @@ class _homescreeState extends State<homescreen> {
   @override
   Widget build(BuildContext context) {
     return DraggableHome(
-      leading: const Icon(
-        Icons.arrow_back_ios,
-        color: Color(0xff77E2FE),
-      ),
+      // leading: const Icon(
+      //   Icons.arrow_back_ios,
+      //   color: Color(0xff77E2FE),
+      // ),
       title: Container(
         child: Image.asset("images/retailtextlogo.png"),
         width: 120,
@@ -25,34 +27,36 @@ class _homescreeState extends State<homescreen> {
       ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => qrscanner()));
+            },
             icon: const Icon(
-              Icons.qr_code,
+              Icons.qr_code_2,
               color: Color(0xff77E2FE),
             )),
       ],
       headerWidget: headerWidget(context),
-      headerBottomBar: headerBottomBarWidget(),
+      headerBottomBar: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => qrscanner()));
+              },
+              icon: const Icon(
+                Icons.qr_code_2,
+                color: Color(0xff77E2FE),
+              )),
+        ],
+      ),
       body: [listView()],
       fullyStretchable: true,
       backgroundColor: Color(khalfwhite),
       appBarColor: Color(khalfwhite),
     );
   }
-}
-
-Row headerBottomBarWidget() {
-  return const Row(
-    mainAxisSize: MainAxisSize.max,
-    mainAxisAlignment: MainAxisAlignment.end,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Icon(
-        Icons.qr_code,
-        color: Color(0xff77E2FE),
-      ),
-    ],
-  );
 }
 
 Widget headerWidget(BuildContext context) {
@@ -123,8 +127,12 @@ class shop_card extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (context) => shop_screen(Shop_name))),
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => shop_screen(Shop_name)));
+        NotificationServices().showNotification(
+            title: 'Hurry!!', body: '15% offer on your favourite choclate');
+      },
       child: Container(
         padding: EdgeInsets.all(15),
         margin: EdgeInsets.all(0),
