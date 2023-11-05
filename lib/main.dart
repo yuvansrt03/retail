@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: DiamondBottomNavigation(
         itemIcons: const [
           Icons.home,
-          Icons.favorite,
+          Icons.notifications,
         ],
         centerIcon: Icons.qr_code_2,
         selectedIndex: _selectedIndex,
